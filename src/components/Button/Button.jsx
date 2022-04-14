@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Button = ({ price }) => {
+const Button = ({ price, className }) => {
     return (
-        <button className="button button--cart">
+        <button className={`button ${className ? className : ''}`}>
             <span>{price} грн</span>
             <div className="button__delimiter" />
             <svg
