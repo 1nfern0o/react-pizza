@@ -1,18 +1,19 @@
 import React, {useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import { connect } from "react-redux";
+import {useDispatch} from "react-redux";
 import {Header} from "./components";
 import {Cart, Home} from "./pages";
-import {setPizzas as setPizzasAction} from "./redux/action/pizzas";
+import {setPizzas} from "./redux/action/pizzas";
 
-function App({items, setPizzas}) {
+function App() {
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        axios.get('http://localhost:3000/db.json').then((res) => {
-            setPizzas(res.data.pizzas);
+        axios.get('http://localhost:3001/pizzas?_order=asc&_sort=price').then(({ data }) => {
+            dispatch(setPizzas(data));
         });
-    }, [setPizzas]);
+    }, []);
     return (
         <Router>
             <div className="wrapper">
@@ -20,7 +21,7 @@ function App({items, setPizzas}) {
                 <div className="content">
                     <div className="container">
                         <Routes>
-                            <Route exact path="/" element={<Home items={items} />} />
+                            <Route exact path="/" element={<Home />} />
                             <Route exact path="/cart" element={<Cart />} />
                         </Routes>
                     </div>
@@ -30,12 +31,14 @@ function App({items, setPizzas}) {
     );
 }
 
-const mapStateToProps = (state) => ({
-    items: state.pizzas.items,
-    filters: state.filters,
-});
-const mapDispatchToProps = (dispatch) => ({
-    setPizzas: (items) => dispatch(setPizzasAction(items)),
-});
+// const mapStateToProps = (state) => ({
+//     items: state.pizzas.items,
+//     filters: state.filters,
+// });
+// const mapDispatchToProps = (dispatch) => ({
+//     setPizzas: (items) => dispatch(setPizzasAction(items)),
+// });
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

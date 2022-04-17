@@ -10,3 +10,8 @@ const setCategory = (catIndex) => ({
     payload: catIndex,
 });
 
+export {
+    setSortBy,
+    setCategory
+};
+
