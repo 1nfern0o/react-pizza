@@ -1,19 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import {useDispatch} from "react-redux";
 import {Header} from "./components";
 import {Cart, Home} from "./pages";
-import {setPizzas} from "./redux/action/pizzas";
 
 function App() {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        axios.get('http://localhost:3001/pizzas?_order=asc&_sort=price').then(({ data }) => {
-            dispatch(setPizzas(data));
-        });
-    }, []);
     return (
         <Router>
             <div className="wrapper">

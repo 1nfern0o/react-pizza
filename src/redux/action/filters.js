@@ -1,8 +1,8 @@
 import Constants from "../constans";
 
-const setSortBy = (name) => ({
+const setSortBy = ({type, order}) => ({
     type: Constants.SET_SORT_BY,
-    payload: name,
+    payload: {type, order},
 });
 
 const setCategory = (catIndex) => ({
