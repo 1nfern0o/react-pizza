@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Button = ({ price, className }) => {
+const ButtonHeader = ({ totalPrice, totalCount, className }) => {
     return (
         <button className={`button ${className ? className : ''}`}>
-            <span>{price} грн</span>
+            <span>{totalPrice} грн</span>
             <div className="button__delimiter" />
             <svg
                 width="18"
@@ -34,9 +34,9 @@ const Button = ({ price, className }) => {
                     strokeLinejoin="round"
                 />
             </svg>
-            <span>3</span>
+            <span>{totalCount}</span>
         </button>
     );
 };
 
-export default Button;
+export default ButtonHeader;
